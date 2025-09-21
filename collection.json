@@ -1,0 +1,223 @@
+{
+  "info": {
+    "name": "OrderBook Trading System API",
+    "description": "Complete API collection for the OrderBook Trading System with order placement, market data, and trade history",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "2.0.0"
+  },
+  "item": [
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Place Buy Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"buy\",\n  \"price\": 100.50,\n  \"quantity\": 1.5,\n  \"userId\": \"user123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["orders"]
+            },
+            "description": "Place a new buy order in the orderbook"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"buy\",\n  \"price\": 100.50,\n  \"quantity\": 1.5,\n  \"userId\": \"user123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["orders"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"type\": \"buy\",\n  \"price\": 100.50,\n  \"quantity\": 1.5,\n  \"filledQuantity\": 0,\n  \"status\": \"open\",\n  \"userId\": \"user123\",\n  \"createdAt\": \"2024-01-20T10:30:00.000Z\",\n  \"updatedAt\": \"2024-01-20T10:30:00.000Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Place Sell Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"sell\",\n  \"price\": 99.75,\n  \"quantity\": 2.0,\n  \"userId\": \"user456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["orders"]
+            },
+            "description": "Place a new sell order in the orderbook"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"sell\",\n  \"price\": 99.75,\n  \"quantity\": 2.0,\n  \"userId\": \"user456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["orders"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"type\": \"sell\",\n  \"price\": 99.75,\n  \"quantity\": 2.0,\n  \"filledQuantity\": 1.5,\n  \"status\": \"partially_filled\",\n  \"userId\": \"user456\",\n  \"createdAt\": \"2024-01-20T10:31:00.000Z\",\n  \"updatedAt\": \"2024-01-20T10:31:00.000Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Orderbook",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/orders/orderbook",
+              "host": ["{{baseUrl}}"],
+              "path": ["orders", "orderbook"]
+            },
+            "description": "Get current orderbook state with all open buy and sell orders"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/orderbook",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["orders", "orderbook"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [],
+              "body": "{\n  \"buyOrders\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440002\",\n      \"type\": \"buy\",\n      \"price\": 100.25,\n      \"quantity\": 1.0,\n      \"filledQuantity\": 0,\n      \"status\": \"open\",\n      \"userId\": \"user789\",\n      \"createdAt\": \"2024-01-20T10:32:00.000Z\"\n    }\n  ],\n  \"sellOrders\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440003\",\n      \"type\": \"sell\",\n      \"price\": 100.75,\n      \"quantity\": 0.5,\n      \"filledQuantity\": 0,\n      \"status\": \"open\",\n      \"userId\": \"user101\",\n      \"createdAt\": \"2024-01-20T10:33:00.000Z\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Trades",
+      "item": [
+        {
+          "name": "Get Trade History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/trades/history",
+              "host": ["{{baseUrl}}"],
+              "path": ["trades", "history"]
+            },
+            "description": "Get complete trade history of all executed trades"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/trades/history",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["trades", "history"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [],
+              "body": "[\n  {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440004\",\n    \"buyOrderId\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"sellOrderId\": \"550e8400-e29b-41d4-a716-446655440001\",\n    \"buyUserId\": \"user123\",\n    \"sellUserId\": \"user456\",\n    \"price\": 100.50,\n    \"quantity\": 1.5,\n    \"executedAt\": \"2024-01-20T10:31:00.000Z\"\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Market",
+      "item": [
+        {
+          "name": "Get Market Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/market/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["market", "summary"]
+            },
+            "description": "Get comprehensive market summary with price, volume, and activity metrics"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/market/summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["market", "summary"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [],
+              "body": "{\n  \"lastPrice\": 100.50,\n  \"priceChange24h\": 2.25,\n  \"priceChangePercent24h\": 2.29,\n  \"volume24h\": 15075.50,\n  \"totalTrades\": 25,\n  \"openOrders\": 8,\n  \"highPrice24h\": 102.75,\n  \"lowPrice24h\": 98.25\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001",
+      "type": "string"
+    }
+  ]
+}
